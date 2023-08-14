@@ -11,7 +11,7 @@ using ToDoListApp.Data;
 namespace ToDoListApp.Migrations
 {
     [DbContext(typeof(ToDoDbContext))]
-    [Migration("20230814185734_First Migration")]
+    [Migration("20230814211216_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -19,6 +19,36 @@ namespace ToDoListApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+
+            modelBuilder.Entity("ToDoListApp.Models.ActivityLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EntityId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NewValue")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("OldValue")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Property")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Activities");
+                });
 
             modelBuilder.Entity("ToDoListApp.Models.ToDoTask", b =>
                 {
@@ -30,9 +60,11 @@ namespace ToDoListApp.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("DueTo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
